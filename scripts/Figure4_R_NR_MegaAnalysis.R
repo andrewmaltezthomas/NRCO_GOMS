@@ -5,7 +5,10 @@ library(tidyr)
 library(phyloseq)
 library(fido)
 library(stringr)
-
+library(metagMisc)
+library(zCompositions)
+library(driver)
+library(ggdist)
 metaphlan_species <- readRDS("data/R_vs_NR_meta_analysis.rds")
 metaphlan_species@sam_data$age <- as.numeric(metaphlan_species@sam_data$age)
 metaphlan_species@sam_data$age <- scale(metaphlan_species@sam_data$age)[,1]

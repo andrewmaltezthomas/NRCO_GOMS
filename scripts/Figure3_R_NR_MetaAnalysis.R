@@ -228,6 +228,10 @@ library(zinbwave)
 library(DESeq2)
 library(phyloseq)
 library(xlsx)
+library(metagMisc)
+library(ggdist)
+library(zCompositions)
+library(driver)
 metaphlan_species <- readRDS("data/R_vs_NR_meta_analysis.rds")
 metaphlan_species2 <- metaphlan_species
 taxa <- sweep(otu_table(metaphlan_species), 2, metaphlan_species@sam_data$Number_Reads, FUN = "*") / 100
