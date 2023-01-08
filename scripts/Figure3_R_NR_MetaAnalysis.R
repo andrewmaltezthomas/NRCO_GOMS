@@ -1,4 +1,4 @@
-#### Meta Analysis with methods i-vi ########
+#### Meta Analysis with methods i-vii ########
 set.seed(1986)
 normEdgeR <- function(physeq, method = c('TMM', 'RLE', 'upperquartile')) {
   # require(edgeR)
@@ -485,7 +485,7 @@ maaslin_meta_rem_sig <- maaslin_meta_rem@metaresult[which(abs(maaslin_meta_rem@m
 maaslin_meta_rem_sig <- maaslin_meta_rem_sig[which(maaslin_meta_rem_sig$randomP < 0.05 ),]
 write.xlsx(maaslin_meta_rem_sig, "results/R_vs_NR_MetaAnalysis.xlsx", sheetName = "Maaslin2_Logit", col.names = T, row.names = F, append = T)
 
-#### Meta Analysis with SMD (method vii) ########
+#### Meta Analysis with SMD (method viii) ########
 library(metafor)
 library(reshape2)
 library(plyr)
@@ -541,7 +541,7 @@ meta_analysis_results <- meta_analysis_results[!(is.na(meta_analysis_results$`I^
 meta_analysis_results_filt <- meta_analysis_results[meta_analysis_results$Pvalue < 0.05,]
 write.xlsx(meta_analysis_results_filt, "results/R_vs_NR_MetaAnalysis.xlsx", sheetName = "SMD", col.names = T, row.names = F, append = T)
 
-#### Meta Analysis with Pibble (method viii) ########
+#### Meta Analysis with Pibble (method ix) ########
 set.seed(1986)
 write_pibble <- function(pibble_fit=pibble_fit, focus_var=focus_var, siglevel=siglevel) {
   p <- as.data.frame.table(pibble_fit$Lambda) %>% 
