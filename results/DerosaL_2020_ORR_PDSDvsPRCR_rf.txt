@@ -1,0 +1,11 @@
+#samples	761.0
+#features	2611
+#runs	1
+#runs_cv_folds	1
+accuracy	0.7101449275362319	0.0
+f1	0.5897813804961926	0.0
+precision	0.5043058181054401	0.0
+recall	0.7101449275362319	0.0
+auc	0.6469387755102041	0.0
+confusion matrix	49	0
+	20	0

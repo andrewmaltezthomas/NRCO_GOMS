@@ -86,26 +86,26 @@ p3 <- as.data.frame.table(fit1$Lambda) %>%
   mutate(species=rep(rownames(fit1$Y),5))
 saveRDS(p3, "results/Mega_analysis_ORR.rds")
 
-fit1 <- readRDS("results/Mega_analysis_ORR.rds")
+fit1 <- readRDS("results/Mega_analysis_ORR_2.rds")
 fit1$species <- gsub("f__|g__|s__|t__", "", fit1$species)
 fit1$species <- gsub("_unclassified", "", fit1$species)
 sig_decreasing <- fit1 %>%
   mutate(species=reorder(factor(species),Freq),) %>% 
   pivot_wider(species, names_from=.width, values_from=.upper) %>%
-  select(species, p50=`0.5`, p75=`0.75`, p90=`0.9`, p95=`0.95`, p97=`0.97`) %>%
-  filter(!! rlang::sym('p95') < 0) %>%
+  dplyr::select(species, p50=`0.5`, p75=`0.75`, p90=`0.9`, p95=`0.95`, p97=`0.97`) %>%
+  filter(!! rlang::sym('p95') < -0.2) %>%
   mutate(species=factor(species)) %>% 
-  select(species) %>% 
+  dplyr::select(species) %>% 
   pull() %>% 
   levels()
 
 sig_increasing <- fit1 %>%
   mutate(species=reorder(factor(species),Freq),) %>% 
   pivot_wider(species, names_from=.width, values_from=.lower) %>%
-  select(species, p50=`0.5`, p75=`0.75`, p90=`0.9`, p95=`0.95`, p97=`0.97`) %>%
-  filter(!! rlang::sym('p95') > 0) %>%
+  dplyr::select(species, p50=`0.5`, p75=`0.75`, p90=`0.9`, p95=`0.95`, p97=`0.97`) %>%
+  filter(!! rlang::sym('p95') > 0.2) %>%
   mutate(species=factor(species)) %>% 
-  select(species) %>% 
+  dplyr::select(species) %>% 
   pull() %>% 
   levels()
 
@@ -126,8 +126,9 @@ p <- fit1 %>%
     panel.background=element_rect(fill="white"),
     panel.border=element_rect(colour="black", fill=NA, size=1),
     axis.ticks.length=unit(0.25,"cm"), 
-    axis.text.x=element_text(size=8, color="black"),
+    axis.text.x=element_text(size=8.5, color="black"),
     axis.text.y=element_text(size=7.5, color="black")) +
   labs(x="Log-Ratio Value", y=NULL) +
   geom_vline(xintercept=0, linetype="dashed", color="darkgray")
-ggsave(plot = p, filename = "results/Mega_analysis_ORR.pdf", width = 10, height = 14, device = "pdf")
+ggsave(plot = p, filename = "results/Mega_analysis_ORR.pdf", width = 10, height = 5, device = "pdf")
+  
