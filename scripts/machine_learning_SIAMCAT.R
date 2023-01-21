@@ -1,5 +1,5 @@
 library(SIAMCAT)
-setwd("NRCO_GOMS/")
+library(phyloseq)
 metaphlan_species <- readRDS("data/R_vs_NR_meta_analysis.rds")
 metaphlan_species <- subset_samples(metaphlan_species, !(metaphlan_species@sam_data$Cohort %in% c("Leeds_LeeK_2022", "Barcelona_LeeK_2022", "WindTT_2020")))
 metaphlan_species@sam_data$Cohort <- gsub("RoutyB_2022_Lung", "RoutyB_2018_Lung", metaphlan_species@sam_data$Cohort)
